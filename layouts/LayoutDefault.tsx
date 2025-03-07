@@ -1,16 +1,50 @@
 import type { ReactNode } from "react";
 import logoUrl from "../assets/logo.svg";
-import { Link } from "../components/Link.js";
+import { Link } from "../components/Link";
+import { authClient } from "../auth/client";
 
 import "./style.css";
 import "./tailwind.css";
 
 export default function LayoutDefault({ children }: { children: ReactNode }) {
+	const { data } = authClient.useSession();
+
+	const handleSignIn = async () => {
+		await authClient.signIn.social({
+			provider: "github",
+			callbackURL: window.location.href,
+		});
+	};
+
+	const handleSignOut = async () => {
+		await authClient.signOut({
+			fetchOptions: {
+				onSuccess: async () => {
+					alert("You have been signed out");
+				},
+			},
+		});
+	};
+
 	return (
 		<div className={"flex max-w-5xl m-auto"}>
 			<Sidebar>
 				<Logo />
-				<Link href="/">Welcome</Link>
+				{!data?.session && (
+					<button type="button" onClick={handleSignIn}>
+						Sign in
+					</button>
+				)}
+				{data?.session && (
+					<button type="button" onClick={handleSignOut}>
+						Sign out
+					</button>
+				)}
+				{data?.user.name ? (
+					<Link href="/">{`Welcome, ${data.user.name}`}</Link>
+				) : (
+					<Link href="/">Welcome</Link>
+				)}
 				<Link href="/todo">Todo</Link>
 				<Link href="/star-wars">Data Fetching</Link>
 				{""}

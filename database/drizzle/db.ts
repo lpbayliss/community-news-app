@@ -1,9 +1,11 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as todos from "./schema/todos";
+import * as auth from "./schema/auth";
 
 const schema = {
 	...todos,
+	...auth,
 };
 
 let drizzleInstance: ReturnType<typeof drizzle<typeof schema>> | null = null;

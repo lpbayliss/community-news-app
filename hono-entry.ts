@@ -6,8 +6,13 @@ import { createHandler, createMiddleware } from "@universal-middleware/hono";
 import { trpcServer } from "@hono/trpc-server";
 import { appRouter } from "./trpc/server";
 import { dbPostgres } from "./database/drizzle/db";
+import { auth } from "./auth/server";
 
 const app = new Hono();
+
+app.on(["POST", "GET"], "/api/auth/*", (c) => {
+	return auth.handler(c.req.raw);
+});
 
 app.use(
 	"/api/trpc/*",
