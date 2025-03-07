@@ -1,12 +1,12 @@
 import { initTRPC } from "@trpc/server";
 import * as drizzleQueries from "../database/drizzle/queries/todos";
-import type { dbSqlite } from "../database/drizzle/db";
+import type { dbPostgres } from "../database/drizzle/db";
 
 /**
  * Initialization of tRPC backend
  * Should be done only once per backend!
  */
-const t = initTRPC.context<{ db: ReturnType<typeof dbSqlite> }>().create();
+const t = initTRPC.context<{ db: ReturnType<typeof dbPostgres> }>().create();
 
 /**
  * Export reusable router and procedure helpers
