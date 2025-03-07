@@ -16,19 +16,22 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export const appRouter = router({
-  demo: publicProcedure.query(async () => {
-    return { demo: true };
-  }),
-  onNewTodo: publicProcedure
-    .input((value): string => {
-      if (typeof value === "string") {
-        return value;
-      }
-      throw new Error("Input is not a string");
-    })
-    .mutation(async (opts) => {
-      await drizzleQueries.insertTodo(opts.ctx.db, opts.input);
-    }),
+	demo: publicProcedure.query(async () => {
+		return { demo: true };
+	}),
+	allTodos: publicProcedure.query(async (opts) => {
+		return await drizzleQueries.getAllTodos(opts.ctx.db);
+	}),
+	onNewTodo: publicProcedure
+		.input((value): string => {
+			if (typeof value === "string") {
+				return value;
+			}
+			throw new Error("Input is not a string");
+		})
+		.mutation(async (opts) => {
+			await drizzleQueries.insertTodo(opts.ctx.db, opts.input);
+		}),
 });
 
 export type AppRouter = typeof appRouter;

@@ -1,19 +1,26 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTRPC } from "../../trpc/client";
 import { useState } from "react";
 
 export function TodoList({
 	initialTodoItems,
-}: { initialTodoItems: { text: string }[] }) {
-	const [todoItems, setTodoItems] = useState(initialTodoItems);
+}: { initialTodoItems: { id: string; text: string }[] }) {
 	const [newTodo, setNewTodo] = useState("");
+	const queryClient = useQueryClient();
 	const trpc = useTRPC();
-	const newTodoCreator = useMutation(trpc.onNewTodo.mutationOptions());
+	const { data: todoItems, refetch } = useQuery(trpc.allTodos.queryOptions());
+	const newTodoCreator = useMutation(
+		trpc.onNewTodo.mutationOptions({
+			onSuccess() {
+				queryClient.invalidateQueries(trpc.allTodos.queryOptions());
+			},
+		}),
+	);
 
 	return (
 		<>
 			<ul>
-				{todoItems.map((todoItem, index) => (
+				{todoItems?.map((todoItem, index) => (
 					// biome-ignore lint:
 					<li key={index}>{todoItem.text}</li>
 				))}
@@ -22,17 +29,9 @@ export function TodoList({
 				<form
 					onSubmit={async (ev) => {
 						ev.preventDefault();
-
-						// Optimistic UI update
-						setTodoItems((prev) => [...prev, { text: newTodo }]);
-						try {
-							await newTodoCreator.mutate(newTodo);
-							setNewTodo("");
-						} catch (e) {
-							console.error(e);
-							// rollback
-							setTodoItems((prev) => prev.slice(0, -1));
-						}
+						await newTodoCreator.mutate(newTodo);
+						await refetch();
+						setNewTodo("");
 					}}
 				>
 					<input
