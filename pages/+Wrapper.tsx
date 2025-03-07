@@ -30,7 +30,7 @@ export default function Wrapper({ children }: { children: ReactNode }) {
 		createTRPCClient<AppRouter>({
 			links: [
 				httpBatchLink({
-					url: "/api/trpc",
+					url: "http://localhost:3000/api/trpc",
 				}),
 			],
 		}),

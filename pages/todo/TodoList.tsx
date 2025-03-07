@@ -1,14 +1,21 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+	useMutation,
+	useSuspenseQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { useTRPC } from "../../trpc/client";
 import { useState } from "react";
 
-export function TodoList({
-	initialTodoItems,
-}: { initialTodoItems: { id: string; text: string }[] }) {
+export function TodoList() {
 	const [newTodo, setNewTodo] = useState("");
+
 	const queryClient = useQueryClient();
 	const trpc = useTRPC();
-	const { data: todoItems, refetch } = useQuery(trpc.allTodos.queryOptions());
+
+	const { data: todoItems, refetch } = useSuspenseQuery(
+		trpc.allTodos.queryOptions(),
+	);
+
 	const newTodoCreator = useMutation(
 		trpc.onNewTodo.mutationOptions({
 			onSuccess() {
