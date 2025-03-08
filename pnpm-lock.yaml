@@ -85,8 +85,8 @@ importers:
         specifier: 1.9.4
         version: 1.9.4
       '@hono/vite-dev-server':
-        specifier: ^0.18.2
-        version: 0.18.3(hono@4.7.4)
+        specifier: ^0.19.0
+        version: 0.19.0(hono@4.7.4)
       '@tailwindcss/vite':
         specifier: ^4.0.8
         version: 4.0.11(vite@6.2.1(@types/node@18.19.79)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3))
@@ -924,8 +924,8 @@ packages:
       '@trpc/server': ^10.10.0 || >11.0.0-rc
       hono: '>=4.*'
 
-  '@hono/vite-dev-server@0.18.3':
-    resolution: {integrity: sha512-JztypLmq6qtQ3OAcz5vDzwXYBBymLztSbfDuNf4XTWkfppLjf6DHvYHtQZ5idOfNhUzdnbYY7/6QAKlVk6G3QQ==}
+  '@hono/vite-dev-server@0.19.0':
+    resolution: {integrity: sha512-myMc4Nm0nFQSPaeE6I/a1ODyDR5KpQ4EHodX4Tu/7qlB31GfUemhUH/WsO91HJjDEpRRpsT4Zbg+PleMlpTljw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: '*'
@@ -3028,7 +3028,7 @@ snapshots:
       '@trpc/server': 11.0.0-rc.824(typescript@5.8.2)
       hono: 4.7.4
 
-  '@hono/vite-dev-server@0.18.3(hono@4.7.4)':
+  '@hono/vite-dev-server@0.19.0(hono@4.7.4)':
     dependencies:
       '@hono/node-server': 1.13.8(hono@4.7.4)
       hono: 4.7.4
