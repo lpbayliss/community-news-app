@@ -1,4 +1,4 @@
-import { TodoList } from "./TodoList.js";
+import { TodoList } from "./(components)/TodoList.jsx";
 import { useTRPC } from "../../trpc/client";
 
 export default function Page() {
