@@ -1,37 +1,16 @@
-import { initTRPC } from "@trpc/server";
-import * as drizzleQueries from "../database/drizzle/queries/todos";
-import type { dbPostgres } from "../database/drizzle/db";
+import { initTRPC, TRPCError } from "@trpc/server";
 
-/**
- * Initialization of tRPC backend
- * Should be done only once per backend!
- */
-const t = initTRPC.context<{ db: ReturnType<typeof dbPostgres> }>().create();
+import type { appRouter } from "../server/routers/app";
+import type { TRPCContext } from "./context";
 
-/**
- * Export reusable router and procedure helpers
- * that can be used throughout the router
- */
+const t = initTRPC.context<TRPCContext>().create();
+
 export const router = t.router;
 export const publicProcedure = t.procedure;
-
-export const appRouter = router({
-	demo: publicProcedure.query(async () => {
-		return { demo: true };
-	}),
-	allTodos: publicProcedure.query(async (opts) => {
-		return await drizzleQueries.getAllTodos(opts.ctx.db);
-	}),
-	onNewTodo: publicProcedure
-		.input((value): string => {
-			if (typeof value === "string") {
-				return value;
-			}
-			throw new Error("Input is not a string");
-		})
-		.mutation(async (opts) => {
-			await drizzleQueries.insertTodo(opts.ctx.db, opts.input);
-		}),
+export const protectedProcedure = t.procedure.use((opts) => {
+	const user = opts.ctx.session?.user;
+	if (!user) throw new TRPCError({ code: "UNAUTHORIZED" });
+	return opts.next();
 });
 
 export type AppRouter = typeof appRouter;

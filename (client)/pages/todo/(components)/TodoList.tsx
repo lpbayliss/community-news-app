@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useFetchTodos from "../(data)/useFetchTodos";
 import useAddTodo from "../(data)/useAddTodo";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -45,7 +44,7 @@ export function TodoList() {
 				))}
 			</ul>
 			<div>
-				<AddTodoForm onSubmitted={() => setNewTodo("")} />
+				<AddTodoForm />
 			</div>
 		</>
 	);

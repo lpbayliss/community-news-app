@@ -1,37 +1,16 @@
 import "dotenv/config";
 
-import { vikeHandler } from "./server/vike-handler";
 import { Hono } from "hono";
-import { createHandler, createMiddleware } from "@universal-middleware/hono";
-import { trpcServer } from "@hono/trpc-server";
-import { appRouter } from "./trpc/server";
-import { dbPostgres } from "./database/drizzle/db";
-import { auth } from "./auth/server";
+import { withAppContext } from "./server/loaders/with-app-context";
+import { withAuth } from "./server/loaders/with-auth";
+import { withTRPC } from "./server/loaders/with-trpc";
+import { withVike } from "./server/loaders/with-vike";
 
 const app = new Hono();
 
-app.on(["POST", "GET"], "/api/auth/*", (c) => {
-	return auth.handler(c.req.raw);
-});
-
-app.use(
-	"/api/trpc/*",
-	trpcServer({
-		endpoint: "/api/trpc",
-		router: appRouter,
-		createContext: (_opts, c) => {
-			return {
-				db: dbPostgres(),
-			};
-		},
-	}),
-);
-
-/**
- * Vike route
- *
- * @link {@see https://vike.dev}
- **/
-app.all("*", createHandler(vikeHandler)());
+withAppContext(app);
+withAuth(app);
+withTRPC(app);
+withVike(app);
 
 export default app;

@@ -2,7 +2,6 @@ import vikeReact from "vike-react/config";
 import vikeReactQuery from "vike-react-query/config";
 
 import type { Config } from "vike/types";
-import Layout from "../layouts/LayoutDefault.js";
 
 // Default config (can be overridden by pages)
 // https://vike.dev/config
@@ -10,8 +9,6 @@ import Layout from "../layouts/LayoutDefault.js";
 export default {
 	stream: "web",
 	// https://vike.dev/Layout
-	Layout,
-
 	// https://vike.dev/head-tags
 	title: "My Vike App",
 	description: "Demo showcasing Vike",

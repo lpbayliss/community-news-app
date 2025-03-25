@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import * as todos from "./schema/todos";
-import * as auth from "./schema/auth";
+import * as todos from "../../drizzle/schema/todos";
+import * as auth from "../../drizzle/schema/auth";
 
 const schema = {
 	...todos,

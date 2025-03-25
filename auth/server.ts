@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { dbPostgres } from "../database/drizzle/db";
+import { dbPostgres } from "../server/db/db";
 
 export const auth = betterAuth({
 	database: drizzleAdapter(dbPostgres(), {

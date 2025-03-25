@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
-import logoUrl from "../assets/logo.svg";
+import logoUrl from "../../assets/logo.svg";
 import { Link } from "../components/Link";
-import { authClient } from "../auth/client";
+import { authClient } from "../../auth/client";
 
 import "./style.css";
 import "./tailwind.css";
 
-export default function LayoutDefault({ children }: { children: ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
 	const { data } = authClient.useSession();
 
 	const handleSignIn = async () => {
