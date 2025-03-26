@@ -1,7 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 
-import type { appRouter } from "../server/routers/app";
 import type { TRPCContext } from "./context";
+import type { appRouter } from "../server/routers/_app";
 
 const t = initTRPC.context<TRPCContext>().create();
 
