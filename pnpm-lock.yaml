@@ -106,8 +106,8 @@ importers:
         specifier: ^3
         version: 3.2.6(react@19.0.0)(storybook@8.6.9)
       '@hono/vite-dev-server':
-        specifier: ^0.18.2
-        version: 0.18.3(hono@4.7.4)
+        specifier: ^0.19.0
+        version: 0.19.0(hono@4.7.4)
       '@storybook/addon-essentials':
         specifier: ^8.6.9
         version: 8.6.9(@types/react@19.0.10)(storybook@8.6.9)
@@ -1035,8 +1035,8 @@ packages:
       '@trpc/server': ^10.10.0 || >11.0.0-rc
       hono: '>=4.*'
 
-  '@hono/vite-dev-server@0.18.3':
-    resolution: {integrity: sha512-JztypLmq6qtQ3OAcz5vDzwXYBBymLztSbfDuNf4XTWkfppLjf6DHvYHtQZ5idOfNhUzdnbYY7/6QAKlVk6G3QQ==}
+  '@hono/vite-dev-server@0.19.0':
+    resolution: {integrity: sha512-myMc4Nm0nFQSPaeE6I/a1ODyDR5KpQ4EHodX4Tu/7qlB31GfUemhUH/WsO91HJjDEpRRpsT4Zbg+PleMlpTljw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: '*'
@@ -4877,7 +4877,7 @@ snapshots:
       '@trpc/server': 11.0.0(typescript@5.8.2)
       hono: 4.7.4
 
-  '@hono/vite-dev-server@0.18.3(hono@4.7.4)':
+  '@hono/vite-dev-server@0.19.0(hono@4.7.4)':
     dependencies:
       '@hono/node-server': 1.14.0(hono@4.7.4)
       hono: 4.7.4
