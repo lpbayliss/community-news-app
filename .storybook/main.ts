@@ -4,6 +4,7 @@ const config: StorybookConfig = {
 	stories: [
 		"../stories/**/*.mdx",
 		"../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+		"../**/*.stories.@(js|jsx|mjs|ts|tsx)",
 	],
 	addons: [
 		"@storybook/addon-essentials",
@@ -20,8 +21,6 @@ const config: StorybookConfig = {
 		},
 	},
 	typescript: {
-		// Enables the `react-docgen-typescript` parser.
-		// See https://storybook.js.org/docs/api/main-config/main-config-typescript for more information about this option.
 		reactDocgen: "react-docgen-typescript",
 	},
 };
