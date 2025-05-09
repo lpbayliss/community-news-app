@@ -1,28 +1,69 @@
-import { useSubscription } from "@trpc/tanstack-react-query";
-import { useTRPC } from "../../../trpc/client.js";
-import { Counter } from "./Counter.jsx";
+import { useEffect, useRef } from "react";
+import {
+	getPanelElement,
+	getPanelGroupElement,
+	getResizeHandleElement,
+	Panel,
+	PanelGroup,
+	PanelResizeHandle,
+} from "react-resizable-panels";
 
 export default function Page() {
-	const trpc = useTRPC();
-	const { data, status } = useSubscription(
-		trpc.testSubscription.subscriptionOptions(undefined, {
-			enabled: true,
-		}),
-	);
+	const refs = useRef({});
+
+	useEffect(() => {
+		const groupElement = getPanelGroupElement("group");
+		const leftPanelElement = getPanelElement("left-panel");
+		const centerPanelElement = getPanelElement("center-panel");
+		const rightPanelElement = getPanelElement("right-panel");
+		const leftResizeHandleElement =
+			getResizeHandleElement("left-resize-handle");
+		const rightResizeHandleElement = getResizeHandleElement(
+			"right-resize-handle",
+		);
+
+		// If you want to, you can store them in a ref to pass around
+		refs.current = {
+			groupElement,
+			leftPanelElement,
+			centerPanelElement,
+			rightPanelElement,
+			leftResizeHandleElement,
+			rightResizeHandleElement,
+		};
+	}, []);
+
 	return (
 		<>
-			<h1 className={"font-bold text-3xl pb-4"}>My Vike app</h1>
-			This page is:
-			<ul>
-				<li>Rendered to HTML.</li>
-				<li>
-					Interactive. <Counter />
-				</li>
-			</ul>
-			<div>
-				<h2>Data from server: ${status}</h2>
-				<p>Magic number: {data}</p>
-			</div>
+			{/* Shoutbox / Chatbox */}
+			{/* Sidebar - Left - Menu */}
+			{/* Sidebar - Right - Community Details */}
+			<PanelGroup direction="horizontal" id="group">
+				<Panel id="left-panel" minSize={10} maxSize={20} className="h-screen">
+					<div>Menu and Nav</div>
+				</Panel>
+				<PanelResizeHandle
+					id="left-resize-handle"
+					className="w-0.5 bg-gray-300"
+				/>
+				<Panel id="center-panel" className="h-screen">
+					<div>Chatbox</div>
+					<>
+						<div>Thread #1</div>
+						<div>Thread #2</div>
+						<div>Thread #3</div>
+						<div>Thread #4</div>
+						<div>Thread #5</div>
+					</>
+				</Panel>
+				<PanelResizeHandle
+					id="right-resize-handle"
+					className="w-0.5 bg-gray-300"
+				/>
+				<Panel id="right-panel" minSize={10} maxSize={25} className="h-screen">
+					<div>Community Details</div>
+				</Panel>
+			</PanelGroup>
 		</>
 	);
 }

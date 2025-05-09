@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useTRPC } from "../../../../trpc/client";
+import { useTRPC } from "../../trpc/client";
 
 type UseAddTodoProps = { onSettled?: () => void };
 const useAddTodo = (props: UseAddTodoProps) => {

@@ -1,11 +1,11 @@
 import { protectedProcedure, publicProcedure, router } from "../../trpc/server";
-import { setContextValue } from "../utils/context";
-import { createLogger } from "../utils/logger";
+import { Context } from "../utils/context";
+import { Logger } from "../utils/logger";
 import * as drizzleQueries from "../db/queries/todos";
 import EventEmitter, { on } from "node:events";
 import { z } from "zod";
 
-const logger = createLogger("trpc");
+const logger = Logger.instance.child("trpc");
 
 const ee = new EventEmitter();
 
@@ -18,9 +18,9 @@ export const appRouter = router({
 		return await drizzleQueries.getAllTodos(opts.ctx.db);
 	}),
 	onNewTodo: protectedProcedure.input(z.string()).mutation(async (opts) => {
-		setContextValue("procedureName", "onNewTodo");
-		setContextValue("procedureType", "mutation");
-		setContextValue("todo", opts.input);
+		Context.set("procedureName", "onNewTodo");
+		Context.set("procedureType", "mutation");
+		Context.set("todo", opts.input);
 		logger.info("Informative");
 		logger.debug("Debugging?");
 		logger.warn("Warning! Warning!");
