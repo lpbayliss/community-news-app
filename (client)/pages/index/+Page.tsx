@@ -1,69 +1,73 @@
-import { useEffect, useRef } from "react";
-import {
-	getPanelElement,
-	getPanelGroupElement,
-	getResizeHandleElement,
-	Panel,
-	PanelGroup,
-	PanelResizeHandle,
-} from "react-resizable-panels";
+import { useState } from "react";
+import useFetchTodos from "../../hooks/useFetchTodos";
+import useAddTodo from "../../hooks/useAddTodo";
+
+interface Todo {
+	id: string;
+	text: string;
+}
 
 export default function Page() {
-	const refs = useRef({});
+	const [inputValue, setInputValue] = useState<string>("");
+	const todos = useFetchTodos();
+	const addTodo = useAddTodo({
+		onSettled: () => {
+			setInputValue("");
+		},
+	});
 
-	useEffect(() => {
-		const groupElement = getPanelGroupElement("group");
-		const leftPanelElement = getPanelElement("left-panel");
-		const centerPanelElement = getPanelElement("center-panel");
-		const rightPanelElement = getPanelElement("right-panel");
-		const leftResizeHandleElement =
-			getResizeHandleElement("left-resize-handle");
-		const rightResizeHandleElement = getResizeHandleElement(
-			"right-resize-handle",
-		);
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+		event.preventDefault();
+		if (inputValue.trim()) {
+			addTodo(inputValue.trim());
+		}
+	};
 
-		// If you want to, you can store them in a ref to pass around
-		refs.current = {
-			groupElement,
-			leftPanelElement,
-			centerPanelElement,
-			rightPanelElement,
-			leftResizeHandleElement,
-			rightResizeHandleElement,
-		};
-	}, []);
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+		setInputValue(event.target.value);
+	};
 
 	return (
-		<>
-			{/* Shoutbox / Chatbox */}
-			{/* Sidebar - Left - Menu */}
-			{/* Sidebar - Right - Community Details */}
-			<PanelGroup direction="horizontal" id="group">
-				<Panel id="left-panel" minSize={10} maxSize={20} className="h-screen">
-					<div>Menu and Nav</div>
-				</Panel>
-				<PanelResizeHandle
-					id="left-resize-handle"
-					className="w-0.5 bg-gray-300"
-				/>
-				<Panel id="center-panel" className="h-screen">
-					<div>Chatbox</div>
-					<>
-						<div>Thread #1</div>
-						<div>Thread #2</div>
-						<div>Thread #3</div>
-						<div>Thread #4</div>
-						<div>Thread #5</div>
-					</>
-				</Panel>
-				<PanelResizeHandle
-					id="right-resize-handle"
-					className="w-0.5 bg-gray-300"
-				/>
-				<Panel id="right-panel" minSize={10} maxSize={25} className="h-screen">
-					<div>Community Details</div>
-				</Panel>
-			</PanelGroup>
-		</>
+		<div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+			<h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+				Todo List
+			</h1>
+			
+			<form onSubmit={handleSubmit} className="mb-6">
+				<div className="flex gap-2">
+					<input
+						type="text"
+						value={inputValue}
+						onChange={handleInputChange}
+						placeholder="Add a new todo..."
+						className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+					/>
+					<button
+						type="submit"
+						disabled={!inputValue.trim()}
+						className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+					>
+						Add
+					</button>
+				</div>
+			</form>
+
+			<div className="space-y-2">
+				{todos.length === 0 ? (
+					<p className="text-gray-500 text-center py-4">
+						No todos yet. Add one above!
+					</p>
+				) : (
+					todos.map((todo: Todo) => (
+						<div
+							key={todo.id}
+							className="p-3 bg-gray-50 rounded-md border border-gray-200"
+						>
+							<span className="text-gray-800">{todo.text}</span>
+						</div>
+					))
+				)}
+			</div>
+		</div>
 	);
 }
