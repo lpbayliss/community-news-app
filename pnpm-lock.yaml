@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@hono/node-server':
         specifier: ^1.14.0
-        version: 1.14.0(hono@4.7.4)
+        version: 1.14.0(hono@4.9.4)
       '@hono/node-ws':
         specifier: ^1.1.0
-        version: 1.1.0(@hono/node-server@1.14.0(hono@4.7.4))(hono@4.7.4)
+        version: 1.1.0(@hono/node-server@1.14.0(hono@4.9.4))(hono@4.9.4)
       '@hono/trpc-server':
         specifier: ^0.3.4
-        version: 0.3.4(@trpc/server@11.0.0(typescript@5.8.2))(hono@4.7.4)
+        version: 0.3.4(@trpc/server@11.0.0(typescript@5.8.2))(hono@4.9.4)
       '@tanstack/react-query':
         specifier: ^5.69.0
         version: 5.69.0(react@19.0.0)
@@ -37,10 +37,10 @@ importers:
         version: 8.11.11
       '@universal-middleware/core':
         specifier: ^0.4.0
-        version: 0.4.4(hono@4.7.4)
+        version: 0.4.4(hono@4.9.4)
       '@universal-middleware/hono':
         specifier: ^0.4.0
-        version: 0.4.6(hono@4.7.4)
+        version: 0.4.6(hono@4.9.4)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.1(@types/node@18.19.79)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3))
@@ -64,7 +64,7 @@ importers:
         version: 0.39.3(@types/better-sqlite3@7.6.12)(@types/pg@8.11.11)(better-sqlite3@11.8.1)(kysely@0.27.6)(pg@8.13.3)(postgres@3.4.5)
       hono:
         specifier: ^4.7.2
-        version: 4.7.4
+        version: 4.9.4
       pg:
         specifier: ^8.13.3
         version: 8.13.3
@@ -113,7 +113,7 @@ importers:
         version: 3.2.6(react@19.0.0)(storybook@8.6.9)
       '@hono/vite-dev-server':
         specifier: ^0.18.2
-        version: 0.18.3(hono@4.7.4)
+        version: 0.18.3(hono@4.9.4)
       '@storybook/addon-essentials':
         specifier: ^8.6.9
         version: 8.6.9(@types/react@19.0.10)(storybook@8.6.9)
@@ -3050,8 +3050,8 @@ packages:
   headers-polyfill@4.0.3:
     resolution: {integrity: sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ==}
 
-  hono@4.7.4:
-    resolution: {integrity: sha512-Pst8FuGqz3L7tFF+u9Pu70eI0xa5S3LPUmrNd5Jm8nTHze9FxLTK9Kaj5g/k4UcwuJSXTP65SyHOPLrffpcAJg==}
+  hono@4.9.4:
+    resolution: {integrity: sha512-61hl6MF6ojTl/8QSRu5ran6GXt+6zsngIUN95KzF5v5UjiX/xnrLR358BNRawwIRO49JwUqJqQe3Rb2v559R8Q==}
     engines: {node: '>=16.9.0'}
 
   html-encoding-sniffer@4.0.0:
@@ -4875,28 +4875,28 @@ snapshots:
 
   '@hexagon/base64@1.1.28': {}
 
-  '@hono/node-server@1.14.0(hono@4.7.4)':
+  '@hono/node-server@1.14.0(hono@4.9.4)':
     dependencies:
-      hono: 4.7.4
+      hono: 4.9.4
 
-  '@hono/node-ws@1.1.0(@hono/node-server@1.14.0(hono@4.7.4))(hono@4.7.4)':
+  '@hono/node-ws@1.1.0(@hono/node-server@1.14.0(hono@4.9.4))(hono@4.9.4)':
     dependencies:
-      '@hono/node-server': 1.14.0(hono@4.7.4)
-      hono: 4.7.4
+      '@hono/node-server': 1.14.0(hono@4.9.4)
+      hono: 4.9.4
       ws: 8.18.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@hono/trpc-server@0.3.4(@trpc/server@11.0.0(typescript@5.8.2))(hono@4.7.4)':
+  '@hono/trpc-server@0.3.4(@trpc/server@11.0.0(typescript@5.8.2))(hono@4.9.4)':
     dependencies:
       '@trpc/server': 11.0.0(typescript@5.8.2)
-      hono: 4.7.4
+      hono: 4.9.4
 
-  '@hono/vite-dev-server@0.18.3(hono@4.7.4)':
+  '@hono/vite-dev-server@0.18.3(hono@4.9.4)':
     dependencies:
-      '@hono/node-server': 1.14.0(hono@4.7.4)
-      hono: 4.7.4
+      '@hono/node-server': 1.14.0(hono@4.9.4)
+      hono: 4.9.4
       minimatch: 9.0.5
 
   '@inquirer/confirm@5.1.8(@types/node@18.19.79)':
@@ -6648,16 +6648,16 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@universal-middleware/core@0.4.4(hono@4.7.4)':
+  '@universal-middleware/core@0.4.4(hono@4.9.4)':
     dependencies:
       regexparam: 3.0.0
       tough-cookie: 5.1.2
     optionalDependencies:
-      hono: 4.7.4
+      hono: 4.9.4
 
-  '@universal-middleware/hono@0.4.6(hono@4.7.4)':
+  '@universal-middleware/hono@0.4.6(hono@4.9.4)':
     dependencies:
-      '@universal-middleware/core': 0.4.4(hono@4.7.4)
+      '@universal-middleware/core': 0.4.4(hono@4.9.4)
     transitivePeerDependencies:
       - '@cloudflare/workers-types'
       - '@hattip/core'
@@ -7405,7 +7405,7 @@ snapshots:
 
   headers-polyfill@4.0.3: {}
 
-  hono@4.7.4: {}
+  hono@4.9.4: {}
 
   html-encoding-sniffer@4.0.0:
     dependencies:
